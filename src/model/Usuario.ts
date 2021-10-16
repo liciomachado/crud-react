@@ -1,8 +1,8 @@
-export default interface Usuario {
-    uid: string
-    email: string
-    nome: string
-    token: string
-    provedor: string
-    imagemUrl: string
+import UsuarioService from "../service/usuario.service";
+
+export interface Usuario {
+    username: string
+    accessToken: string
 }
+
+export { UsuarioService }

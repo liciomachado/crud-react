@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import AuthInput from "../components/auth/AuthInput";
 import { IconeAtencao } from "../components/icons";
-import useAuth from "../data/hook/useAuth";
+import useAuth from "../hooks/useAppAuth";
 
 export default function Autenticacao() {
-
-    const { usuario, login, loginGoogle, cadastrar } = useAuth()
-
+    const { handleLogin, authenticated } = useAuth()
     const [erro, setErro] = useState(null)
     const [modo, setModo] = useState<'login' | 'cadastro'>('login')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+
+    useEffect(() => {
+        console.debug('auth ', authenticated)
+
+    }, [])
 
     function exibirErro(msg: any, tempoSegundos = 5) {
         setErro(msg)
@@ -20,7 +24,7 @@ export default function Autenticacao() {
     async function submeter() {
         try {
             if (modo === 'login') {
-                //await login(email, senha)
+                await handleLogin(email, senha)
             } else {
                 //await cadastrar(email, senha)
             }
@@ -33,7 +37,7 @@ export default function Autenticacao() {
     return (
         <div className="flex h-screen items-center justify-center">
             <div className="hidden md:block md:w-1/2 lg:w-2/3">
-                <img src="https://source.unsplash.com/featured/?military"
+                <img src="https://source.unsplash.com/collection/2799326"
                     alt="imagem tela" className="h-screen w-full object-cover" />
             </div>
             <div className="m-10 w-full md:w-1/2 lg:w-1/3">
