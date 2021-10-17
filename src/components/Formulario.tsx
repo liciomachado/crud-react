@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useProdutos from "../hooks/useProdutos";
 import { Produto } from "../model/Produto";
 import Botao from "./Botao";
 import Entrada from "./Entrada";
@@ -11,7 +10,6 @@ interface FormularioProps {
 }
 
 export default function Formulario(props: FormularioProps) {
-    const produtosService = useProdutos()
     const id = props.produto?.id
     const [item, setItem] = useState(props.produto?.item ?? '')
     const [description, setDescription] = useState(props.produto?.description ?? '')

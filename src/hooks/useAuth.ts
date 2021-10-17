@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 
-import UsuarioService from '../service/usuario.service'
 import history from '../history'
 import { axiosInstance } from '../service/api.service'
-import { Usuario } from '../model/Usuario'
+import { Usuario, UsuarioService } from '../model/Usuario'
 
 export default function useAuth() {
     const usuarioService = new UsuarioService();
@@ -15,9 +14,9 @@ export default function useAuth() {
         const user = localStorage.getItem('admin-template-user')
 
         if (user) {
-            const u: Usuario = JSON.parse(user)
-            axiosInstance.defaults.headers['Authorization'] = `Bearer ${u.accessToken}`
-            setUserLogged(u)
+            const token = JSON.parse(user)
+            axiosInstance.defaults.headers['Authorization'] = `Bearer ${token}`
+            setUserLogged(token)
             setAuthenticated(true)
             console.log("auth: " + authenticated)
         }
@@ -27,6 +26,17 @@ export default function useAuth() {
 
     async function handleLogin(username: string, password: string) {
         const { data } = await usuarioService.login(username, password)
+
+        axiosInstance.defaults.headers['Authorization'] = `Bearer ${data.accessToken}`
+        setAuthenticated(true)
+        const user = await userModel(data)
+        setUserLogged(user)
+        localStorage.setItem('admin-template-user', JSON.stringify(user.accessToken))
+        history.push('/')
+    }
+
+    async function handleRegister(username: string, password: string) {
+        const { data } = await usuarioService.register(username, password)
 
         axiosInstance.defaults.headers['Authorization'] = `Bearer ${data.accessToken}`
         setAuthenticated(true)
@@ -50,5 +60,5 @@ export default function useAuth() {
         history.push('/')
     }
 
-    return { authenticated, loading, handleLogin, handleLogout, userLogged }
+    return { authenticated, loading, handleLogin, handleRegister, handleLogout, userLogged }
 }

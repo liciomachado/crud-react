@@ -13,7 +13,7 @@ export default function useProdutos() {
 
     useEffect(() => {
         obterTodos()
-    }, [])
+    })
 
     async function obterTodos() {
         const res = await repo.get()

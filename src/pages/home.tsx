@@ -1,20 +1,14 @@
-import { useEffect } from "react";
 import Botao from "../components/Botao";
 import Formulario from "../components/Formulario";
 import Layout from "../components/Layout";
 import Tabela from "../components/Tabela";
-import useAuth from "../hooks/useAppAuth";
+import { useAuth } from "../Context/auth";
 import useProdutos from "../hooks/useProdutos";
 
 export default function Home() {
-    const { authenticated, handleLogout } = useAuth()
-
+    const { Logout } = useAuth()
 
     const { produtos, tabelaVisivel, exibirTabela, selecionarProduto, excluirProduto, produto, salvarProduto, novoProduto } = useProdutos()
-
-    function sair() {
-        handleLogout()
-    }
 
     return (
         <div className={`
@@ -27,7 +21,7 @@ export default function Home() {
                 {tabelaVisivel ? (
                     <>
                         <div className="flex justify-between">
-                            <Botao cor="gray" className={"mb-4"} onClick={sair}>Sair</Botao>
+                            <Botao cor="gray" className={"mb-4"} onClick={Logout}>Sair</Botao>
                             <Botao cor="green" className={"mb-4"} onClick={novoProduto}>Novo Produto</Botao>
                         </div>
                         <Tabela produtos={produtos}

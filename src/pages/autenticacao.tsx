@@ -1,20 +1,14 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router";
-import AuthInput from "../components/auth/AuthInput";
+import { useState } from "react";
+import AuthInput from "../components/AuthInput";
 import { IconeAtencao } from "../components/icons";
-import useAuth from "../hooks/useAppAuth";
+import { useAuth } from "../Context/auth";
 
 export default function Autenticacao() {
-    const { handleLogin, authenticated } = useAuth()
+    const { handleLogin, handleRegister } = useAuth()
     const [erro, setErro] = useState(null)
     const [modo, setModo] = useState<'login' | 'cadastro'>('login')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-
-    useEffect(() => {
-        console.debug('auth ', authenticated)
-
-    }, [])
 
     function exibirErro(msg: any, tempoSegundos = 5) {
         setErro(msg)
@@ -26,7 +20,7 @@ export default function Autenticacao() {
             if (modo === 'login') {
                 await handleLogin(email, senha)
             } else {
-                //await cadastrar(email, senha)
+                await handleRegister(email, senha)
             }
         } catch (e: any) {
             exibirErro(e?.message ?? 'Erro inesperado')
@@ -54,7 +48,7 @@ export default function Autenticacao() {
                 }
 
 
-                <AuthInput label="Email"
+                <AuthInput label="Usuario"
                     valor={email}
                     tipo="email"
                     valorMudou={setEmail}
