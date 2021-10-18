@@ -13,7 +13,7 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<Usuario | null>(null);
 
   const usuarioService = new UsuarioService();
@@ -59,6 +59,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   function Logout() {
     setUser(null);
+    sessionStorage.removeItem('@App:user');
+    sessionStorage.removeItem('@App:token');
   }
 
   return (

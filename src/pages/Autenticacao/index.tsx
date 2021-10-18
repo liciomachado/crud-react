@@ -1,7 +1,7 @@
 import { useState } from "react";
-import AuthInput from "../components/AuthInput";
-import { IconeAtencao } from "../components/icons";
-import { useAuth } from "../Context/auth";
+import AuthInput from "../../components/AuthInput";
+import { IconeAtencao } from "../../components/icons";
+import { useAuth } from "../../context/authContext";
 
 export default function Autenticacao() {
     const { handleLogin, handleRegister } = useAuth()

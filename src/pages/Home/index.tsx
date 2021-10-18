@@ -1,12 +1,12 @@
-import Botao from "../components/Botao";
-import Formulario from "../components/Formulario";
-import Layout from "../components/Layout";
-import Tabela from "../components/Tabela";
-import { useAuth } from "../Context/auth";
-import useProdutos from "../hooks/useProdutos";
+import Botao from "../../components/Botao";
+import Formulario from "../../components/Formulario";
+import Layout from "../../components/Layout";
+import Tabela from "../../components/Tabela";
+import { useAuth } from "../../context/authContext";
+import useProdutos from "../../hooks/useProdutos";
 
 export default function Home() {
-    const { Logout } = useAuth()
+    const { Logout, user } = useAuth()
 
     const { produtos, tabelaVisivel, exibirTabela, selecionarProduto, excluirProduto, produto, salvarProduto, novoProduto } = useProdutos()
 
@@ -17,7 +17,7 @@ export default function Home() {
       text-white
     `}>
 
-            <Layout titulo="Lista de compras">
+            <Layout titulo={`Lista de compras de ${user.username}`}>
                 {tabelaVisivel ? (
                     <>
                         <div className="flex justify-between">

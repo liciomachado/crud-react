@@ -9,6 +9,6 @@ export default class UsuarioService {
     }
 
     async register(userName: string, password: string): Promise<AxiosResponse<Usuario, any>> {
-        return axiosInstance.post('Auth/signin', { userName, password })
+        return axiosInstance.post('Auth/register', { userName, password })
     }
 }

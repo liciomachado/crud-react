@@ -7,5 +7,4 @@ const axiosInstance = axios.create({
     baseURL: 'https://localhost:44300/api/v1/',
 });
 
-
 export { axiosInstance };
