@@ -14,11 +14,11 @@ export default function Tabela(props: TabelaProps) {
     function renderizarCabecalho() {
         return (
             <tr>
-                <th className="text-left p-4">Código</th>
-                <th className="text-left p-4">Produto</th>
-                <th className="text-left p-4">Descricao</th>
-                <th className="text-left p-4">Preço</th>
-                {exibirAcoes ? <th className="text-left p-4">Ações</th> : false}
+                <th className="text-left p-1">Código</th>
+                <th className="text-left p-3">Produto</th>
+                <th className="text-left p-3">Descricao</th>
+                <th className="text-left p-3">Preço</th>
+                {exibirAcoes ? <th className="text-left p-2">Ações</th> : false}
             </tr>
         )
     }
@@ -27,10 +27,10 @@ export default function Tabela(props: TabelaProps) {
         return props.produtos?.map((produto, i) => {
             return (
                 <tr key={produto.id} className={`${i % 2 === 0 ? 'bg-blue-200' : 'bg-blue-100'}`}>
-                    <td className="text-left p-4">{produto.id}</td>
-                    <td className="text-left p-4">{produto.item}</td>
-                    <td className="text-left p-4">{produto.description}</td>
-                    <td className="text-left p-4">{produto.price}</td>
+                    <td className="text-left p-1">{produto.id}</td>
+                    <td className="text-left p-3">{produto.item}</td>
+                    <td className="text-left p-3">{produto.description}</td>
+                    <td className="text-left p-3">{produto.price}</td>
                     {exibirAcoes ? renderizarAcoes(produto) : false}
                 </tr>
             )
